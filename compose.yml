@@ -1,0 +1,24 @@
+services:
+  squid:
+    image: ubuntu/squid:6.6-24.04_beta
+    container_name: squid
+    ports:
+      - published: 3128
+        target: 3128
+    volumes:
+      - type: volume
+        source: squid-log
+        target: /var/log/squid
+      - type: volume
+        source: squid-cache
+        target: /var/spool/squid
+      - type: bind
+        source: squid.conf
+        target: /etc/squid/squid.conf
+      # - type: bind
+      #   source: .htpasswd
+      #   target: /etc/squid/.htpasswd
+
+volumes:
+  squid-log:
+  squid-cache:
